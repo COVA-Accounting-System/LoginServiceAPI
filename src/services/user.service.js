@@ -12,7 +12,6 @@ export const createUserService = async (data) => {
   return jwt.sign({ id: userToGetToken._id }, process.env.SECRET);
 };
 
-
 export const validateUserService = async (req, res) => {
   try {
     
