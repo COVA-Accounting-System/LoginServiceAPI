@@ -1,8 +1,7 @@
 import { User } from "../models/user.model.js";
 import { createUser, getUser } from "../databases/user.repository.js";
 import jwt from "jsonwebtoken";
-import { config } from "dotenv";
-config();
+
 
 export const createUserService = async (data) => {
   const { name, email, password } = data.body;
