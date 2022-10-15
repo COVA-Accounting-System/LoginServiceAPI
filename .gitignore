@@ -1,10 +1,6 @@
 
 .env
 
-Dockerfile
-
 fly.toml
-
-.dockerignore
 
 node_modules
