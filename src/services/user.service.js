@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import { config } from "dotenv";
 config();
 
+
 export const createUserService = async (data) => {
   const { name, email, password } = data.body;
   const encryptedPassword = await User.encryptPassword(password);
@@ -29,7 +30,7 @@ export const validateUserService = async (req, res) => {
     }
 
     const token = jwt.sign({id: userFound._id}, process.env.SECRET)
-    return res.status(200).json(token)
+    return res.status(200).json({token: token})
 
   } catch (err) {
     res.status(500).json({ message: err.message });
