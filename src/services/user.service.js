@@ -20,13 +20,13 @@ export const validateUserService = async (req, res) => {
     const userFound = await getUser({ email });
 
     if (!userFound) {
-        res.status(400).json({ message: "User not found!" });
+       return res.status(400).json({ message: "User not found!" });
     }
 
     const isPasswordEqual = await User.verifyPassword(password, userFound.password );
 
     if (!isPasswordEqual) {
-        res.status(401).json({ message: "Unauthorized" });
+        return res.status(401).json({ message: "Unauthorized" });
     }
 
     const token = jwt.sign({id: userFound._id}, process.env.SECRET)
