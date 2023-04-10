@@ -1,5 +1,5 @@
 import { User } from "../models/user.model.js";
-import { createUser, getUser } from "../databases/user.repository.js";
+import { createUser, getUser, getUsers } from "../databases/user.repository.js";
 import jwt from "jsonwebtoken";
 import { config } from "dotenv";
 config();
@@ -11,6 +11,10 @@ export const createUserService = async (data) => {
   const newUser = new User({ name, email, password: encryptedPassword });
   const userToGetToken = await createUser(newUser);
   return jwt.sign({ id: userToGetToken._id }, process.env.SECRET);
+};
+
+export const getAllUsersService = async () => {
+  return await getUsers();
 };
 
 export const validateUserService = async (req, res) => {

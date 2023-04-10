@@ -3,7 +3,9 @@ import cors from 'cors'
 import morgan from 'morgan'
 import userRouter from '../routes/user.route.js';
 import authRouter from "../routes/auth.route.js"
-import { validateUserData, validateLoginData } from '../middleware/validateData.js';
+import adminRouter from "../routes/admin.route.js"
+import adminAuth from "../routes/adminAuth.route.js"
+import { validateUserData, validateLoginData, validateAdminData } from '../middleware/validateData.js';
 import './db.config.js'
 
 
@@ -20,5 +22,8 @@ app.get("/", (req, res) => {
 
 app.use("/api/user",validateUserData, userRouter);
 app.use("/api/auth",validateLoginData, authRouter)
+
+app.use("/api/admin",validateAdminData, adminRouter)
+app.use("/api/adminAuth",validateLoginData, adminAuth)
 
 export default app;

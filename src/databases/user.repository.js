@@ -7,3 +7,7 @@ export const createUser = async (newUser) => {
 export const getUser = async (query) => {
     return User.findOne(query)
 }
+
+export const getUsers = async () => {
+    return User.find()
+}
