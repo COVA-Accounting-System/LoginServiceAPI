@@ -16,7 +16,7 @@ export const createAdminService = async (data) => {
 export const validateAdminService = async (req, res) => {
   try {
     
-    const { name, email, password } = req.body;
+    const { email, password } = req.body;
     const adminFound = await getAdmin({ email });
 
     if (!adminFound) {
@@ -30,7 +30,7 @@ export const validateAdminService = async (req, res) => {
     }
 
     const token = jwt.sign({id: adminFound._id}, process.env.SECRET)
-    return res.status(200).json({token: token})
+    return res.status(200).json({name:adminFound.name, email: adminFound.email, token: token})
 
   } catch (err) {
     res.status(500).json({ message: err.message });

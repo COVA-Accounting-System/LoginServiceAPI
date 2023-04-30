@@ -39,7 +39,7 @@ export const deleteUserService = async data => {
 
 export const validateUserService = async (req, res) => {
   try {
-    const { name, email, password } = req.body
+    const { email, password } = req.body
     const userFound = await getUser({ email })
 
     if (!userFound) {
@@ -56,7 +56,14 @@ export const validateUserService = async (req, res) => {
     }
 
     const token = jwt.sign({ id: userFound._id }, process.env.SECRET)
-    return res.status(200).json({ token: token })
+    return res
+      .status(200)
+      .json({
+        name: userFound.name,
+        lastName: userFound.lastName,
+        email: userFound.email,
+        token: token
+      })
   } catch (err) {
     res.status(500).json({ message: err.message })
   }
